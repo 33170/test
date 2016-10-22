@@ -33,4 +33,62 @@ exaMPLES
                $ git remote add -f -t master -m master origin git://example.com/git.git/
                $ git merge origin
 
+------------------------------------------------------------------
+提交过程
 
+Git status 查看当前分支状态
+
+git  add  需要提交的文件
+
+git  rm 需要删除的文件
+
+git commit  -m "注释说明"
+
+git  branch  查看当前是属于哪个分支，假如是puppis 分支
+
+git pull --rebase 更新到与服务器同步
+
+git  push origin puppis 提交到puppis分支的远程服务器
+
+
+git checkout  aa  切换到aa分支上
+
+git  branch -a 显示所有远程分支
+
+git branch 显示本地所有分支
+
+git checkout  remotes/origin/Puppis -b Puppis 建立分支Puppis ，这个分支指向远程分支Puppis
+
+git checkout -b cc  假如当前分支为aa，那么bb就是在aa上建立的一个分支，和aa内容一样
+
+git checkout -f  要恢复的文件   这样就可以恢复到和服务器一样
+
+git cherry-pick  -x  commit号  当其他分支有改过的bug，而你的分支也需要的时候，就可以直接摘过来，就不需要重新改。
+
+git reset  commit号  这个就是删掉本地分支上commit号之后的所有提交  ，最后如果要上传服务器，还需要push上去
+
+ git revert  commit 号  这个就是删除本地分支上commit号的该条提交，最后如果要上传服务器，还需要push上去
+
+ git reset   commit号 --hard 这个是删除本地分支上得最后一个提交，这个提交只是本地提交，是指没有push到服务器上的。
+
+git reset --hard HEAD  去除刚刚git merge的内容
+
+git reset HEAD 恢复本地提交
+
+merge 的时候先确保本地干净并且和服务器同步了，则先git branch -a 列出所有远程分支如下：
+
+  remotes/origin/S101_JH_C
+  remotes/origin/S101_JH_D
+  remotes/origin/S101_JH_E
+  remotes/origin/S101_JH_F
+  remotes/origin/S101_JH_G
+  remotes/origin/S101_JH_H
+  remotes/origin/S101_QZ_A
+  remotes/origin/S101_QZ_B
+  remotes/origin/S101_SS_A
+  remotes/origin/S101_SS_B
+  remotes/origin/S101_SS_C
+
+则需要通过命令  git merge remotes/origin/S101_SS_A的方式去merge S101_SS_A的内容。
+
+在Linux下，一般有几个工程都有分支，则上面那些命令只需要加上repo forall -c  就行。
